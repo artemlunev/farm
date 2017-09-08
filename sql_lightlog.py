@@ -4,9 +4,7 @@ from time import localtime # берем localtime как основную фун
 from pyparsing import Word, alphas, nums
 import config
 
-#db_local = pymysql.connect(host='localhost', user='root', password='290173', db='farm')
 
-#db_web = pymysql.connect(host='server179.hosting.reg.ru', port=3306, user='u0385355_default', password='ao!d3OHo', db='u0385355_farm')
 
 
 def gettime(): #функция получения количества минут
@@ -15,7 +13,10 @@ def gettime(): #функция получения количества мину�
     return mytime
 
 def light(st, action):
-    db = pymysql.connect(host='localhost', user='root', password='290173', db='farm')
+    db = pymysql.connect(host = config.host_local
+                         user = config.user_local
+                         password = config.password_local
+                         db = config.db_local)
     cur = db.cursor()
     
     datetimeWrite = (time.strftime("%Y-%m-%d ") + time.strftime("%H:%M:%S"))
@@ -27,7 +28,12 @@ def light(st, action):
     db.close()
     
 def light_web(st, action):
-    db = pymysql.connect(host='server179.hosting.reg.ru', port=3306, user='u0385355_default', password='ao!d3OHo', db='u0385355_farm')
+    db = pymysql.connect(host = config.host_web,
+                         port = config.port_web,
+                         user = config.user_web,
+                         password = config.password_web,
+                         db = config.db_web,
+                         cursorclass=pymysql.cursors.DictCursor)
     cur = db.cursor()
     
     datetimeWrite = (time.strftime("%Y-%m-%d ") + time.strftime("%H:%M:%S"))
@@ -39,7 +45,10 @@ def light_web(st, action):
     db.close()
 
 def dht(humidity, temp):
-    db = pymysql.connect(host='localhost', user='root', password='290173', db='farm')
+    db = pymysql.connect(host = config.host_local
+                         user = config.user_local
+                         password = config.password_local
+                         db = config.db_local)
     cur = db.cursor()
     
     datetimeWrite = (time.strftime("%Y-%m-%d ") + time.strftime("%H:%M:%S"))
@@ -52,7 +61,10 @@ def dht(humidity, temp):
 
     
 def getstatus(): ## light
-    db = pymysql.connect(host='localhost', user='root', password='290173', db='farm')
+    db = pymysql.connect(host = config.host_local
+                         user = config.user_local
+                         password = config.password_local
+                         db = config.db_local)
     cur = db.cursor()
     sql = "SELECT `id`, `status`, `minute` FROM `lightLog` ORDER BY `id` DESC LIMIT 1"
     cur.execute(sql)
@@ -62,7 +74,10 @@ def getstatus(): ## light
 
 
 def pump(st, action):
-    db = pymysql.connect(host='localhost', user='root', password='290173', db='farm')
+    db = pymysql.connect(host = config.host_local
+                         user = config.user_local
+                         password = config.password_local
+                         db = config.db_local)
     cur = db.cursor()
     
     datetimeWrite = (time.strftime("%Y-%m-%d ") + time.strftime("%H:%M:%S"))
@@ -74,7 +89,12 @@ def pump(st, action):
     db.close()
     
 def pump_web(st, action):
-    db = pymysql.connect(host='server179.hosting.reg.ru', port=3306, user='u0385355_default', password='ao!d3OHo', db='u0385355_farm')
+    db = pymysql.connect(host = config.host_web,
+                         port = config.port_web,
+                         user = config.user_web,
+                         password = config.password_web,
+                         db = config.db_web,
+                         cursorclass=pymysql.cursors.DictCursor)
     cur = db.cursor()
     
     datetimeWrite = (time.strftime("%Y-%m-%d ") + time.strftime("%H:%M:%S"))
@@ -86,7 +106,10 @@ def pump_web(st, action):
     db.close()
 
 def get_pump_status():
-    db = pymysql.connect(host='localhost', user='root', password='290173', db='farm')
+    db = pymysql.connect(host = config.host_local
+                         user = config.user_local
+                         password = config.password_local
+                         db = config.db_local)
     cur = db.cursor()
     sql = "SELECT `id`, `status`, `minute` FROM `pump` ORDER BY `id` DESC LIMIT 1"
     cur.execute(sql)
@@ -95,7 +118,10 @@ def get_pump_status():
     return status
 
 def get_pump_status_bot():
-    db = pymysql.connect(host='localhost', user='root', password='290173', db='farm')
+    db = pymysql.connect(host = config.host_local
+                         user = config.user_local
+                         password = config.password_local
+                         db = config.db_local)
     cur = db.cursor()
     sql = "SELECT `status` FROM `pump` ORDER BY `id` DESC LIMIT 1"
     cur.execute(sql)
@@ -109,7 +135,10 @@ def get_pump_status_bot():
     return text
 
 def get_dht_temp_bot():
-    db = pymysql.connect(host='localhost', user='root', password='290173', db='farm')
+    db = pymysql.connect(host = config.host_local
+                         user = config.user_local
+                         password = config.password_local
+                         db = config.db_local)
     cur = db.cursor()
     sql = "SELECT `temp` FROM `dht` ORDER BY `id` DESC LIMIT 1"
     cur.execute(sql)

@@ -5,11 +5,11 @@ import config
 
 
 def get():
-    db = pymysql.connect(host='server179.hosting.reg.ru',
-                         port=3306,
-                         user='u0385355_default',
-                         password='ao!d3OHo',
-                         db='u0385355_farm',
+    db = pymysql.connect(host = config.host_web,
+                         port = config.port_web,
+                         user = config.user_web,
+                         password = config.password_web,
+                         db = config.db_web,
                          cursorclass=pymysql.cursors.DictCursor)
     cur = db.cursor()
     sql = "SELECT * FROM `schedule`"
@@ -17,8 +17,20 @@ def get():
     schedule = {}
     schedule = cur.fetchall()
     db.close()
-    print.schedule[0]
+    
+    i = 0
+    schedule_len = len(schedule)
+
+    while i < schedule_len:
+        print (schedule[i])
+        i = i + 1
+    
+    
+
+   
+    print (schedule_len)
     time1 = schedule[0]
+    
     print (time1['id'])
 
 
