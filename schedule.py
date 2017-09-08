@@ -4,7 +4,7 @@ from pyparsing import Word, alphas, nums
 import config
 
 
-def get():
+def get(device):
     db = pymysql.connect(host = config.host_web,
                          port = config.port_web,
                          user = config.user_web,
@@ -12,26 +12,9 @@ def get():
                          db = config.db_web,
                          cursorclass=pymysql.cursors.DictCursor)
     cur = db.cursor()
-    sql = "SELECT * FROM `schedule`"
-    cur.execute(sql)
+    sql = "SELECT * FROM `schedule` WHERE `device`=%s"
+    cur.execute(sql, (device))
     schedule = {}
     schedule = cur.fetchall()
     db.close()
-    
-    i = 0
-    schedule_len = len(schedule)
-
-    while i < schedule_len:
-        print (schedule[i])
-        i = i + 1
-    
-    
-
-   
-    print (schedule_len)
-    time1 = schedule[0]
-    
-    print (time1['id'])
-
-
-get()
+    return(schedule)
