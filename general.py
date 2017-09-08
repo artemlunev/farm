@@ -91,19 +91,11 @@ def turn_light_night():#функция проверки времени и вкл
                 lightoff()
                 pumpoff()
              
-#while True:
-    #turn_light_night()
-    #print(light_status)
-    #time.sleep(60) 
+while True:
+    turn_light_night()
+    print(light_status)
+    time.sleep(60) 
 
-def checkinterval(): #функция проверки времени
-    schedule = schedule.get('lamp')
-    for i in range(0, len(schedule)):
-        time = schedule[i]
-        print(time[time_from])
-
-checkinterval()
-        
     
 
 #включение функционала по запуску ночного скрипта:
