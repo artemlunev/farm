@@ -1,33 +1,25 @@
-import datetime
 import pymysql
-from time import localtime
+import time
+from pyparsing import Word, alphas, nums
+import config
 
 
-db = pymysql.connect(host='localhost', user='root', password='290173', db='farm')
-sql = "SELECT `id`, `time_start`, `time_end`, `device` FROM `schedule`"
-cur = db.cursor()
-schedule = list()
-cur.execute(sql)
-print(cur.id)
-for id, time_start, time_end, device in cur:
-    schedule.extend([[id, device, time_start.seconds, time_end.seconds]])
-    print(schedule)
-i = len(schedule)
-print(i)
-print(schedule.pop(1))
+def get():
+    db = pymysql.connect(host='server179.hosting.reg.ru',
+                         port=3306,
+                         user='u0385355_default',
+                         password='ao!d3OHo',
+                         db='u0385355_farm',
+                         cursorclass=pymysql.cursors.DictCursor)
+    cur = db.cursor()
+    sql = "SELECT * FROM `schedule`"
+    cur.execute(sql)
+    schedule = {}
+    schedule = cur.fetchall()
+    db.close()
+    print.schedule[0]
+    time1 = schedule[0]
+    print (time1['id'])
 
 
-def getseconds():
-    mytimefake = localtime()
-    mytime = mytimefake.tm_seconds
-    return int(mytime)
-
-
-
-#schedule = cur.fetchone()
-#i = len(schedule)/3
-#print(schedule)
-#print(i)
-
-
-db.close()
+get()
