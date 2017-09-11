@@ -8,6 +8,7 @@ from time import localtime # берем localtime как основную фун
 import bot_post
 import Adafruit_DHT
 import schedule
+import check
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD) #"включение" GPIO
@@ -77,22 +78,32 @@ def getminute(): #функция получения количества мин�
     return int(mytime)
 
 
-def turn_light_night():#функция проверки времени и включения тампы по если ок
-        if gethour() >= 21 or gethour() < 7:
-            if light_status == 0 or light_status == 2:
-                lighton()
-                pumpon()
-        elif gethour() >= 10 and gethour() < 15:
-            if light_status == 0 or light_status == 2:
-                lighton()
-                pumpon()
-        else:
-            if light_status == 1 or light_status == 2:
-                lightoff()
-                pumpoff()
+def main():#функция проверки времени и включения тампы по если ок
+    lamp_check = check.checkinterval('lamp')
+    pump_check = check.checkinterval('pump')
+    
+    if lamp_check == 1:
+        if light_status == 0 or light_status == 2: #прверка, что лампа не включена
+            lighton()
+            pumpon()
+    else:
+        if light_status == 1 or light_status == 2:
+            lightoff()
+            pumpoff()
+
+
+                
+    if pump_check == 1:
+        if pump_status == 0 or pump_status == 2: #прверка, что лампа не включена
+            lighton()
+            pumpon()
+    else:
+        if pump_status == 1 or puumpt_status == 2:
+            lightoff()
+            pumpoff()
              
 while True:
-    turn_light_night()
+    main()
     print(light_status)
     time.sleep(60) 
 

@@ -7,21 +7,40 @@ from time import localtime # берем localtime как основную фун
 
 import schedule
 
+ON = 1
+OFF = 0
 
-def checkinterval(): #функция проверки времени
-    timetable = schedule.get('lamp')
-    now_time = datetime.datetime.now()
-    now_date = datetime.date.today()
-    print(now_date)
+
+def checkinterval(device): #функция проверки времени
+    timetable = schedule.get(device)
+    now_date = datetime.date.today() #получение текущей даты
+    now_time = datetime.datetime.now() #получение текущего времени
+    
+    
     for i in range(0, len(timetable)):
         time = timetable[i]
-        print(time['time_from'] + now_time)
-        if time['time_from'] < datetime.datetime.now():
-            print(0)
-        else:
-            print(1)
 
-checkinterval()
+        if time['date'] == None: #регулярные событи
+            time_from = datetime.datetime(now_date.year, now_date.month, now_date.day, 00, 00 , 00) + time['time_from']
+            time_to = datetime.datetime(now_date.year, now_date.month, now_date.day, 00, 00 , 00) + time['time_to']
+            
+
+            if time_to > now_time and time_from <= now_time:
+                return(ON)
+            else:
+                return(OFF)
+                
+        else:
+            time_from = datetime.datetime(time['date'].year, time['date'].month, time['date'].day, 00, 00 , 00) + time['time_from']
+            time_to = datetime.datetime(time['date'].year, time['date'].month, time['date'].day, 00, 00 , 00) + time['time_to']
+
+            if time_to > now_time and time_from <= now_time:
+                return(ON)
+            else:
+                return(OFF)
+
+
+checkinterval('lamp')
         
     
 
