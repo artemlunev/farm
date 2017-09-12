@@ -32,8 +32,7 @@ def light_web(st, action):
                          port = config.port_web,
                          user = config.user_web,
                          password = config.password_web,
-                         db = config.db_web,
-                         cursorclass=pymysql.cursors.DictCursor)
+                         db = config.db_web)
     cur = db.cursor()
     
     datetimeWrite = (time.strftime("%Y-%m-%d ") + time.strftime("%H:%M:%S"))
@@ -93,8 +92,7 @@ def pump_web(st, action):
                          port = config.port_web,
                          user = config.user_web,
                          password = config.password_web,
-                         db = config.db_web,
-                         cursorclass=pymysql.cursors.DictCursor)
+                         db = config.db_web)
     cur = db.cursor()
     
     datetimeWrite = (time.strftime("%Y-%m-%d ") + time.strftime("%H:%M:%S"))
