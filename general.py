@@ -98,7 +98,7 @@ def main():#функция проверки времени и включения
             lighton()
             pumpon()
     else:
-        if pump_status == 1 or puumpt_status == 2:
+        if pump_status == 1 or pump_status == 2:
             lightoff()
             pumpoff()
              
