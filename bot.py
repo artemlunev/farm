@@ -1,6 +1,8 @@
 import telebot
 import config
 import sql_lightlog
+import schedule
+
 device = 'string'
 bot = telebot.TeleBot(config.token)
 
@@ -26,6 +28,21 @@ def add(message):
         keyboard.add(button_lamp, button_pump, button_all)
         bot.send_message(message.chat.id, "Что включить?", reply_markup=keyboard)
 
+@bot.message_handler(regexp="lamp 1")
+def lamp_on(message):
+        schedule.add(1, 'lamp')
+
+@bot.message_handler(regexp="lamp 2")
+def lamp_on(message):
+        schedule.add(2, 'lamp')
+
+@bot.message_handler(regexp="pump 1")
+def lamp_on(message):
+        schedule.add(1, 'pump')
+
+@bot.message_handler(regexp="pump 2")
+def lamp_on(message):
+        schedule.add(2, 'pump')
 
 
 @bot.callback_query_handler(func=lambda c: True)
