@@ -85,21 +85,17 @@ def main():#функция проверки времени и включения
     if lamp_check == 1:
         if light_status == 0 or light_status == 2: #прверка, что лампа не включена
             lighton()
-            pumpon()
     else:
         if light_status == 1 or light_status == 2:
             lightoff()
-            pumpoff()
 
 
                 
     if pump_check == 1:
         if pump_status == 0 or pump_status == 2: #прверка, что лампа не включена
-            lighton()
             pumpon()
     else:
         if pump_status == 1 or pump_status == 2:
-            lightoff()
             pumpoff()
              
 while True:
