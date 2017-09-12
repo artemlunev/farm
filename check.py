@@ -24,7 +24,6 @@ def checkinterval(device): #функция проверки времени
             time_from = datetime.datetime(now_date.year, now_date.month, now_date.day, 00, 00 , 00) + time['time_from']
             time_to = datetime.datetime(now_date.year, now_date.month, now_date.day, 00, 00 , 00) + time['time_to']
             
-
             if time_to > now_time and time_from <= now_time:
                 return(ON)
             else:
